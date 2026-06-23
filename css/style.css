@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+
+/* RESET CSS */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron', sans-serif;
+}
+
+/* BACKGROUND HALAMAN */
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:url("../img/background.gif");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+overflow:hidden;
+
+}
+
+/* OVERLAY GELAP DI BACKGROUND */
+body::before{
+
+content:"";
+
+position:absolute;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.45);
+
+}
+
+/* FRAME HP / KOTAK UTAMA LOGIN */
+.mobile-frame{
+
+width:360px;
+height:640px;
+
+border-radius:30px;
+
+/* WARNA FRAME ABU-ABU */
+background:linear-gradient(135deg,#6e6e6e,#2f2f2f);
+
+backdrop-filter:blur(8px);
+
+box-shadow:0 0 30px #00000055;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+z-index:1;
+
+}
+
+/* CONTAINER ISI LOGIN */
+.container{
+
+width:100%;
+text-align:center;
+
+color:white;
+
+}
+
+/* LOGO GAME / APLIKASI */
+.logo{
+
+width:130px;
+margin-bottom:10px;
+
+}
+
+/* TULISAN LOGIN */
+h2{
+
+margin-bottom:20px;
+
+/* INI TULISAN LOGIN */
+color:white ;
+
+text-shadow:0 0 10px #ffffff;
+
+}
+
+/* INPUT ID DAN PASSWORD */
+input{
+
+width:100%;
+
+padding:12px;
+
+margin:10px 0;
+
+border:none;
+border-radius:8px;
+
+/* WARNA INPUT */
+background:#3a3a3a;
+
+color:white;
+
+border:1px solid #8a8a8a;
+
+}
+
+/* TOMBOL MASUK */
+button{
+
+width:100%;
+
+padding:12px;
+
+margin-top:10px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+/* INI TOMBOL MASUK */
+background:#8a8a8a;
+
+color:black;
+
+font-weight:bold;
+
+transition:0.3s;
+
+}
+
+/* EFEK SAAT TOMBOL DISENTUH */
+button:hover{
+
+transform:scale(1.05);
+background:#b0b0b0;
+
+}
+
+/* CARD MENU SETELAH LOGIN */
+.card{
+
+/* WARNA CARD */
+background:linear-gradient(135deg,#7a7a7a,#3a3a3a);
+
+padding:25px;
+
+border-radius:12px;
+
+margin-bottom:20px;
+
+}
+
+/* TOMBOL LOGOUT */
+.logout{
+
+background:#5a5a5a;
+color:white;
+
+}
+
+/* TOMBOL ABOUT */
+.about{
+
+background:#777777;
+color:white;
+
+}
+
+/* TOMBOL KEMBALI */
+.back{
+
+background:#cccccc;
+color:black;
+
+}

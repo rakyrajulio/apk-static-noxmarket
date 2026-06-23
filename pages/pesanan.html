@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pemesanan - NOVEXA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-300 flex justify-center items-center min-h-screen font-sans">
+
+  <div class="w-[375px] min-h-screen relative overflow-hidden text-white shadow-2xl">
+    
+    <div class="absolute inset-0">
+      <img src="../img/background.gif" class="w-full h-full object-cover" alt="Background">
+    </div>
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <div class="relative z-10 p-6">
+      <header class="mb-8 flex items-center gap-4">
+        <a href="produk.html" class="bg-white/20 p-2 rounded-full backdrop-blur-md transition active:scale-90">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </a>
+        <h2 class="text-xl font-bold">Form Pemesanan</h2>
+      </header>
+
+      <div class="bg-white/10 backdrop-blur-xl p-6 rounded-3xl border border-white/20 shadow-2xl">
+        <form id="orderForm" class="space-y-4 text-sm">
+          
+          <div>
+            <label class="block text-gray-300 mb-1">Produk Terpilih</label>
+            <input type="text" id="selectedProduct" readonly class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-blue-300 font-bold outline-none">
+          </div>
+
+          <div>
+            <label class="block text-gray-300 mb-1">Nama Lengkap</label>
+            <input type="text" id="buyerName" required placeholder="Masukkan nama Anda" class="w-full bg-white/20 border border-white/20 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition">
+          </div>
+
+          <div>
+            <label class="block text-gray-300 mb-1">Alamat Pengiriman</label>
+            <textarea required rows="3" placeholder="Alamat lengkap..." class="w-full bg-white/20 border border-white/20 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-gray-300 mb-1">Metode Pembayaran</label>
+            <select class="w-full bg-white/20 border border-white/20 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition appearance-none">
+              <option class="text-black">Transfer Bank</option>
+              <option class="text-black">E-Wallet (OVO/Dana)</option>
+              <option class="text-black">COD (Bayar di Tempat)</option>
+            </select>
+          </div>
+
+           <div>
+            <label class="block text-gray-300 mb-1">Nominal</label>
+            <input type="text" id="nominalQty" required placeholder="Masukkan jumlah produk" class="w-full bg-white/20 border border-white/20 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition">
+          </div>
+
+          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-xl transition active:scale-95 mt-6">
+            KONFIRMASI PESANAN
+          </button>
+        </form>
+      </div>
+
+      <p class="text-center text-[10px] text-gray-400 mt-8">
+        *Admin akan menghubungi Anda via WhatsApp setelah konfirmasi.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Price map for products (matching URL params)
+    const priceMap = {
+      'Headphone X1': 50000,
+      'Boom Speaker': 25000,
+      'Earbuds Pro': 30000
+    };
+
+    // Mengambil nama produk dari URL (misal: pesanan.html?product=Headphone)
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get('product');
+    if (product) {
+      document.getElementById('selectedProduct').value = product;
+    }
+
+    // Logika saat tombol Konfirmasi Pesanan ditekan
+    document.getElementById('orderForm').onsubmit = (e) => {
+      e.preventDefault();
+      
+      // Membuat objek data pesanan baru
+      const productName = document.getElementById('selectedProduct').value;
+      const qty = parseInt(document.getElementById('nominalQty').value) || 1;
+      const price = priceMap[productName] || 0;
+      const total = price * qty;
+      
+      const orderData = {
+        produk: productName,
+        nama: document.getElementById('buyerName').value,
+        jumlah: qty,
+        hargaSatuan: `Rp.${price.toLocaleString()}`,
+        totalHarga: `Rp.${total.toLocaleString()}`,
+        tanggal: new Date().toLocaleDateString('id-ID'), 
+        status: "Diproses"
+      };
+      
+      // Mengambil riwayat pesanan yang sudah ada di memori browser (localStorage)
+      let orders = JSON.parse(localStorage.getItem('myOrders')) || [];
+      
+      // Menambahkan pesanan baru ke dalam daftar
+      orders.push(orderData);
+      
+      // Menyimpan kembali daftar yang sudah diperbarui ke localStorage
+      localStorage.setItem('myOrders', JSON.stringify(orders));
+
+      alert("Pesanan Berhasil Disimpan!");
+      
+      // Pindah otomatis ke halaman daftar pesanan
+      window.location.href = "daftarpesanan.html";
+    };
+  </script>
+
+</body>
+</html>
